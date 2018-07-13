@@ -1,18 +1,26 @@
 {
-    "name": "suomato/hubspot-rss-parser",
-    "description": "Parsing HubSpot rss-feed and turning it into PHP Object",
-    "type": "library",
-    "license": "MIT",
-    "keywords": ["hubspot", "parser", "rss-feed"],
-    "authors": [
-        {
-            "name": "Toni Suomalainen",
-            "email": "toni.suomalainen@taitounited.fi"
-        }
-    ],
-    "minimum-stability": "stable",
-    "autoload": {
-      "psr-4": { "Suomato\\": "src/" }
-    },
-    "require": {}
+  "name": "suomato/hubspot-rss-parser",
+  "description": "Parsing HubSpot rss-feed and turning it into PHP Object",
+  "type": "library",
+  "license": "MIT",
+  "keywords": [
+    "hubspot",
+    "parser",
+    "rss-feed"
+  ],
+  "authors": [
+    {
+      "name": "Toni Suomalainen",
+      "email": "toni.suomalainen@taitounited.fi"
+    }
+  ],
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "Suomato\\": "src/"
+    }
+  },
+  "require": {
+    "php": "^7.0"
+  }
 }
