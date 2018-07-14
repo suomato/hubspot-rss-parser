@@ -1,6 +1,6 @@
 {
   "name": "suomato/hubspot-rss-parser",
-  "description": "Parsing HubSpot rss-feed and turning it into PHP Object",
+  "description": "Parsing HubSpot rss-feed and turning it into Array of PHP objects",
   "type": "library",
   "license": "MIT",
   "keywords": [
