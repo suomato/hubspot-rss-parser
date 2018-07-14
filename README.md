@@ -62,4 +62,12 @@ $posts = $parser->get([
 ]);
 ```
 
+### Offset
+```
+// Skips first three posts
+$posts = $parser->get([
+  'offset' => 3
+]);
+```
+
 

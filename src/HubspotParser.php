@@ -12,23 +12,34 @@ class HubspotParser
         $hubspot_posts        = $xml->channel->item;
 
         foreach ($hubspot_posts as $hubspot_post) {
-            preg_match('/<img[^>]+>/i', $hubspot_post->description, $result);
-            preg_match_all('/(alt|title|src)=("[^"]*")/i', $result[0], $result2);
+            if (isset($hubspot_post->description)) {
+                preg_match('/<img[^>]+>/i', $hubspot_post->description, $result);
+                preg_match_all('/(alt|title|src)=("[^"]*")/i', $result[0], $result2);
+                $image = [
+                    'src' => str_replace('"', '', $result2[2][0]),
+                    'alt' => str_replace('"', '', $result2[2][1]),
+                ];
+            } else {
+                $image = null;
+            }
             array_push(
                 $this->posts,
                 new HubspotPost(
                 (string)$hubspot_post->title,
                 (string)$hubspot_post->link,
                 (array)$hubspot_post->category,
-                [
-                    'src' => str_replace('"', '', $result2[2][0]),
-                    'alt' => str_replace('"', '', $result2[2][1]),
-                ]
+                $image
             )
         );
         }
     }
 
+    /**
+     * Return array of posts
+     *
+     * @param array $args
+     * @return array
+     */
     public function get($args = [])
     {
         $posts = $this->posts;
@@ -55,10 +66,24 @@ class HubspotParser
             }));
         }
 
+        if (isset($args['offset'])) {
+            $posts = array_slice($posts, $args['offset'], $this->count());
+        }
+
         if (isset($args['limit'])) {
-            $posts = array_slice($posts, 0, $args['limit']);
+            $posts = array_slice($posts, $offset = 0, $args['limit']);
         }
 
         return $posts;
+    }
+
+    /**
+     * Return number of posts
+     *
+     * @return int
+     */
+    public function count()
+    {
+        return count($this->posts);
     }
 }
